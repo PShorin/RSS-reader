@@ -4,6 +4,12 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 export default {
   mode: process.env.NODE_ENV || 'development',
   entry: './src/index.js',
+  output: {
+    filename: '[name].[contenthash].js',
+    assetModuleFilename: 'asset/[hash][ext][query]',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
+  },
   devServer: {
     open: true,
     host: 'localhost',
