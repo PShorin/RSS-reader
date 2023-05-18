@@ -1,19 +1,15 @@
-import path from 'path';
-import url from 'url';
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+var path = require('path');
 
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export default {
+module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: './src/index.js',
   output: {
     filename: '[name].[contenthash].js',
     assetModuleFilename: 'asset/[hash][ext][query]',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(process.cwd(), 'dist'),
     clean: true,
   },
   devServer: {
