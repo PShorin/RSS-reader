@@ -144,9 +144,9 @@ const handlerProcessState = (elements, state, value, i18nInstance) => {
     case 'filling':
       break;
     case 'finished':
-      handlerSuccessFinish(elements, i18nInstance); // change name?
+      handlerSuccessFinish(elements, i18nInstance);
       break;
-    case 'error': // можно ли это убрать и оставить только в главной функции?
+    case 'error':
       handlerFinishWithError(elements, state.process.error, i18nInstance);
       break;
     case 'sending':
@@ -158,14 +158,13 @@ const handlerProcessState = (elements, state, value, i18nInstance) => {
   }
 };
 
-// нужен ли этот switch?
-
 export default (elements, state, i18nInstance) => (path, value) => {
   switch (path) {
     case 'process.processState':
       handlerProcessState(elements, state, value, i18nInstance);
       break;
 
+    case 'uiState.visitedLinksIds':
     case 'content.posts':
       createContainer('posts', elements, state, i18nInstance);
       break;
@@ -178,11 +177,7 @@ export default (elements, state, i18nInstance) => (path, value) => {
       renderModalWindow(elements, state, value);
       break;
 
-    case 'uiState.visitedLinksIds': //?
-      createContainer('posts', elements, state, i18nInstance);
-      break;
-
     default:
       break;
-  } // нужна ли тут обработка error???
+  }
 };

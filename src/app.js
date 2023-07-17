@@ -100,7 +100,6 @@ export default () => {
       setLocale({
         mixed: {
           notOneOf: 'doubleRss',
-          required: 'emptyField', // надо ли?
         },
         string: {
           url: 'invalidUrl',
