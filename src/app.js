@@ -69,6 +69,10 @@ export default () => {
           posts: [],
           feeds: [],
         },
+        uiState: {
+          visitedLinksIds: new Set(),
+          modalId: '',
+        },
       };
 
       const elements = {
@@ -107,7 +111,6 @@ export default () => {
         e.preventDefault();
         watchedState.process.processState = 'filling';
         watchedState.inputValue = e.target.value;
-        console.log('filling');
       });
 
       elements.form.addEventListener('submit', (e) => {
@@ -123,7 +126,6 @@ export default () => {
           .then((response) => {
             const data = response.data.contents;
             const { feed, posts } = parser(data, i18nInstance, elements);
-            console.log('parser');
             const feedId = uniqueId();
 
             watchedState.content.feeds.push({
@@ -134,7 +136,6 @@ export default () => {
             createPosts(watchedState, posts, feedId);
 
             watchedState.process.processState = 'finished';
-            console.log('finished');
           })
           .catch((error) => {
             watchedState.valid = false;
@@ -142,6 +143,17 @@ export default () => {
             watchedState.process.error = error.message ?? 'defaultError';
             watchedState.process.processState = 'error';
           });
+      });
+
+      elements.modal.modalWindow.addEventListener('show.bs.modal', (e) => {
+        const currentPostId = e.relatedTarget.getAttribute('data-id');
+        watchedState.uiState.visitedLinksIds.add(currentPostId);
+        watchedState.uiState.modalId = currentPostId;
+      });
+
+      elements.posts.addEventListener('click', (e) => {
+        const currentPostId = e.target.dataset.id;
+        watchedState.uiState.visitedLinksIds.add(currentPostId);
       });
     });
 };

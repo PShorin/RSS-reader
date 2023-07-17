@@ -55,6 +55,11 @@ const renderPosts = (state, div, i18nInstance) => {
       target: '_blank',
       rel: 'noopener noreferrer',
     });
+    a.classList.add('fw-bold');
+    if (state.uiState.visitedLinksIds.has(id)) {
+      a.classList.remove('fw-bold');
+      a.classList.add('fw-normal', 'link-secondary');
+    }
     a.textContent = title;
 
     const button = document.createElement('button');
@@ -97,6 +102,15 @@ const renderFeeds = (state, div) => {
   });
 
   div.append(ul);
+};
+
+const renderModalWindow = (elements, state, postId) => {
+  const currentPost = state.content.posts.find(({ id }) => id === postId);
+  const { title, description, link } = currentPost;
+
+  elements.modal.title.textContent = title;
+  elements.modal.body.textContent = description;
+  elements.modal.button.setAttribute('href', link);
 };
 
 const createContainer = (type, elements, state, i18nInstance) => {
@@ -158,6 +172,14 @@ export default (elements, state, i18nInstance) => (path, value) => {
 
     case 'content.feeds':
       createContainer('feeds', elements, state, i18nInstance);
+      break;
+
+    case 'uiState.modalId':
+      renderModalWindow(elements, state, value);
+      break;
+
+    case 'uiState.visitedLinksIds': //?
+      createContainer('posts', elements, state, i18nInstance);
       break;
 
     default:
