@@ -5,7 +5,7 @@
 [![Actions Status](https://github.com/PShorin/frontend-project-11/workflows/hexlet-check/badge.svg)](https://github.com/PShorin/frontend-project-11/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/08694c98127775729a00/maintainability)](https://codeclimate.com/github/PShorin/frontend-project-11/maintainability)
 
-View in browser: https://frontend-project-11-drab-gamma.vercel.app/
+View in browser: [https://frontend-project-11-drab-gamma.vercel.app/](https://frontend-project-11-drab-gamma.vercel.app/){:target="\_blank"}
 
 ## Description:
 
