@@ -29,20 +29,24 @@ const createPosts = (state, newPosts, feedId) => {
   state.content.posts = [...state.content.posts, ...preparedPosts];
 };
 
-const getNewPosts = (state) => {
-  return state.content.feeds.map(({ link, feedId }) =>
+const getNewPosts = (state, timeout = 5000) => {
+  const promises = state.content.feeds.map(({ link, feedId }) =>
     getAxiosResponse(link).then((response) => {
       const { posts } = parser(response.data.contents);
-      const addedPostsLinks = state.content.posts.map((post) => post.link);
-      const newPosts = posts.filter(
-        (post) => !addedPostsLinks.includes(post.link)
-      );
+      const addedPosts = state.content.posts.map((post) => post.link);
+      const newPosts = posts.filter((post) => !addedPosts.includes(post.link));
       if (newPosts.length > 0) {
         createPosts(state, newPosts, feedId);
       }
       return Promise.resolve();
     })
   );
+
+  Promise.allSettled(promises).finally(() => {
+    setTimeout(() => {
+      getNewPosts(state);
+    }, timeout);
+  });
 };
 
 export default () => {
