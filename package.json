@@ -25,6 +25,7 @@
     "eslint": "^8.38.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.3",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.7.5",
     "postcss-loader": "^7.2.4",
@@ -40,6 +41,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "i18next": "^23.0.2",
+    "lodash": "^4.17.21",
     "on-change": "^4.0.2",
     "yup": "^1.2.0"
   }

@@ -1,11 +1,11 @@
 import { string, setLocale } from 'yup';
 import onChange from 'on-change';
-import render from './view.js';
 import i18next from 'i18next';
-import resources from './locales/index.js';
-import parser from './parser.js';
 import uniqueId from 'lodash/uniqueId.js';
 import axios from 'axios';
+import render from './view.js';
+import resources from './locales/index.js';
+import parser from './parser.js';
 
 const validate = (url, urlList) => {
   const schema = string().trim().required().url().notOneOf(urlList);
