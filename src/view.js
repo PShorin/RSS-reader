@@ -7,8 +7,8 @@ const handlerFinishWithError = (elements, error, i18nInstance) => {
 
   elements.input.classList.add('is-invalid');
 
-  elements.button.disabled = false;
-  elements.input.disabled = false;
+  elements.button.removeAttribute('disabled');
+  elements.input.removeAttribute('readonly');
 };
 
 const handlerSuccessFinish = (elements, i18nInstance) => {
@@ -149,6 +149,7 @@ const handlerProcessState = (elements, state, value, i18nInstance) => {
     case 'error':
       handlerFinishWithError(elements, state.process.error, i18nInstance);
       break;
+    case 'validating':
     case 'sending':
       elements.button.disabled = true;
       elements.input.readOnly = true;
