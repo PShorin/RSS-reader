@@ -1,9 +1,8 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from 'path';
 
-var path = require('path');
-
-module.exports = {
+export default {
   mode: process.env.NODE_ENV || 'development',
   entry: './src/index.js',
   output: {
