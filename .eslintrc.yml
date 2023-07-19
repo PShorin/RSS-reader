@@ -1,18 +1,8 @@
----
-root: true
-
-plugins:
-  - jest
-
 env:
-  node: true
-  jest: true
   browser: true
-
-extends:
-  - 'airbnb-base'
-  - 'plugin:jest/recommended'
-
-rules:
-  no-console: 0
-  import/extensions: 0
+  es2021: true
+overrides: []
+parserOptions:
+  ecmaVersion: latest
+  sourceType: module
+rules: {}
