@@ -8,7 +8,8 @@ import resources from './locales/index.js';
 import parser from './parser.js';
 
 const validate = (url, urlList) => {
-  const schema = string().trim().required().url().notOneOf(urlList);
+  const schema = string().trim().required().url()
+    .notOneOf(urlList);
   return schema.validate(url);
 };
 
@@ -30,17 +31,15 @@ const createPosts = (state, newPosts, feedId) => {
 };
 
 const getNewPosts = (state, timeout = 5000) => {
-  const promises = state.content.feeds.map(({ link, feedId }) =>
-    getAxiosResponse(link).then((response) => {
-      const { posts } = parser(response.data.contents);
-      const addedPosts = state.content.posts.map((post) => post.link);
-      const newPosts = posts.filter((post) => !addedPosts.includes(post.link));
-      if (newPosts.length > 0) {
-        createPosts(state, newPosts, feedId);
-      }
-      return Promise.resolve();
-    })
-  );
+  const promises = state.content.feeds.map(({ link, feedId }) => getAxiosResponse(link).then((response) => {
+    const { posts } = parser(response.data.contents);
+    const addedPosts = state.content.posts.map((post) => post.link);
+    const newPosts = posts.filter((post) => !addedPosts.includes(post.link));
+    if (newPosts.length > 0) {
+      createPosts(state, newPosts, feedId);
+    }
+    return Promise.resolve();
+  }));
 
   Promise.allSettled(promises).finally(() => {
     setTimeout(() => {
@@ -92,7 +91,7 @@ export default () => {
 
       const watchedState = onChange(
         initialState,
-        render(elements, initialState, i18nInstance)
+        render(elements, initialState, i18nInstance),
       );
 
       getNewPosts(watchedState);
