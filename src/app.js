@@ -31,7 +31,8 @@ const createPosts = (state, newPosts, feedId) => {
 };
 
 const getNewPosts = (state, timeout = 5000) => {
-  const promises = state.content.feeds.map(({ link, feedId }) => getAxiosResponse(link).then((response) => {
+  const allFeeds = state.content.feeds;
+  const promises = allFeeds.map(({ link, feedId }) => getAxiosResponse(link).then((response) => {
     const { posts } = parser(response.data.contents);
     const addedPosts = state.content.posts.map((post) => post.link);
     const newPosts = posts.filter((post) => !addedPosts.includes(post.link));
